@@ -52,13 +52,17 @@ async function fetchToday(animate = false) {
 async function fetchHistory() {
 	try {
 		const res = await fetch("/api/history");
-		const history = await res.json();
+		let history = await res.json();
+
+		// Filter to only show data from Aug 28, 2025 onwards
+		const chartStartDate = '2025-08-28';
+		history = history.filter(d => d.day >= chartStartDate);
 
 		// Add today if it's not in the history
 		const today = new Date().toISOString().split("T")[0];
 		const hasToday = history.some((d) => d.day === today);
 
-		if (!hasToday) {
+		if (!hasToday && today >= chartStartDate) {
 			// Fetch today's count to add to the chart
 			const todayRes = await fetch("/api/today");
 			const todayData = await todayRes.json();
