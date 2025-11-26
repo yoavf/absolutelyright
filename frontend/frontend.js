@@ -1,6 +1,7 @@
 // Chart annotations configuration
 const CHART_ANNOTATIONS = [
-	{ date: '2025-09-29', label: 'Sonnet 4.5' }
+	{ date: '2025-09-29', label: 'Sonnet 4.5' },
+	{ date: '2025-11-24', label: 'Opus 4.5' }
 ];
 
 async function fetchToday(animate = false) {
@@ -54,8 +55,8 @@ async function fetchHistory() {
 		const res = await fetch("/api/history");
 		let history = await res.json();
 
-		// Filter to only show data from Aug 28, 2025 onwards
-		const chartStartDate = '2025-08-28';
+		// Filter to only show data from Sep 7, 2025 onwards
+		const chartStartDate = '2025-09-07';
 		history = history.filter(d => d.day >= chartStartDate);
 
 		// Add today if it's not in the history
