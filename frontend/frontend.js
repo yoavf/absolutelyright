@@ -11,10 +11,21 @@ async function fetchToday(animate = false) {
 		const countElement = document.getElementById("today-inline");
 		const subtitleElement = document.querySelector(".subtitle");
 		const rightCountElement = document.getElementById("right-count");
+		const titleActive = document.getElementById("title-active");
+		const titleZero = document.getElementById("title-zero");
+
+		// Toggle title based on count
+		if (data.count === 0) {
+			titleActive.style.display = "none";
+			titleZero.style.display = "block";
+		} else {
+			titleActive.style.display = "block";
+			titleZero.style.display = "none";
+		}
 
 		// Update right count display
 		if (data.right_count && data.right_count > 0) {
-			rightCountElement.textContent = `(+ ${data.right_count} times I was just "right")`;
+			rightCountElement.textContent = `(I was just "right" ${data.right_count} times)`;
 			rightCountElement.style.display = "block";
 		} else {
 			rightCountElement.style.display = "none";
