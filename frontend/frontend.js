@@ -25,15 +25,21 @@ async function fetchToday(animate = false) {
 
 		// Update right count display
 		if (data.right_count && data.right_count > 0) {
-			rightCountElement.textContent = `(I was just "right" ${data.right_count} times)`;
+			rightCountElement.textContent = `(I was just "right" ${data.right_count} ${data.right_count === 1 ? 'time' : 'times'})`;
 			rightCountElement.style.display = "block";
 		} else {
 			rightCountElement.style.display = "none";
 		}
 
+		const timesLabel = document.getElementById("times-label");
+		const updateTimesLabel = (count) => {
+			timesLabel.textContent = count === 1 ? 'time' : 'times';
+		};
+
 		if (animate && data.count > 0) {
 			// Show count - 1 first
 			countElement.textContent = data.count - 1;
+			updateTimesLabel(data.count - 1);
 
 			// Fade in the subtitle
 			subtitleElement.style.transition = "opacity 0.5s ease-in";
@@ -44,6 +50,7 @@ async function fetchToday(animate = false) {
 				countElement.style.transform = "scale(1.3)";
 				countElement.style.color = "#e63946";
 				countElement.textContent = data.count;
+				updateTimesLabel(data.count);
 
 				// Reset the scale
 				setTimeout(() => {
@@ -52,6 +59,7 @@ async function fetchToday(animate = false) {
 			}, 1000);
 		} else {
 			countElement.textContent = data.count;
+			updateTimesLabel(data.count);
 			// Fade in for non-animated load
 			subtitleElement.style.transition = "opacity 0.5s ease-in";
 			subtitleElement.style.opacity = "1";
