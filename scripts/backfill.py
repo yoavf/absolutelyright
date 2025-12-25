@@ -168,6 +168,7 @@ def main():
                 for date in sorted_dates
                 if daily_counts["absolutely"].get(date, 0) > 0
                 or daily_counts["right"].get(date, 0) > 0
+                or total_messages_per_day.get(date, 0) > 0
             )
 
             print(f"Found {total_to_upload} days with data to upload.")
@@ -185,7 +186,7 @@ def main():
                 right_count = daily_counts["right"].get(date, 0)
                 total_msgs = total_messages_per_day.get(date, 0)
 
-                if abs_count > 0 or right_count > 0:
+                if abs_count > 0 or right_count > 0 or total_msgs > 0:
                     upload_text = f"  Uploading {date}: absolutely={abs_count:2d}, right={right_count:2d}, total={total_msgs:3d}..."
                     print(f"{upload_text:<75}", end="")
 

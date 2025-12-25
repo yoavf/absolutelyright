@@ -140,6 +140,7 @@ h1 {
 	margin-top: 2rem;
 	padding: 0 1rem;
 	width: 100%;
+	position: relative;
 }
 
 .chart-section h2 {
@@ -356,4 +357,66 @@ footer a:hover {
 	display: inline-block;
 	color: #9ca3af;
 	font-weight: 700;
+}
+
+.postit-note {
+	background: linear-gradient(135deg, #fff9c4 0%, #fff59d 100%);
+	padding: 1rem 1.25rem;
+	width: 180px;
+	transform: rotate(2deg);
+	box-shadow:
+		2px 2px 0 rgba(0,0,0,0.05),
+		4px 4px 8px rgba(0,0,0,0.1);
+	position: absolute;
+	top: 20px;
+	right: 10px;
+	font-size: 0.85rem;
+	line-height: 1.4;
+	color: #555;
+	z-index: 10;
+}
+
+.postit-note::before {
+	content: "";
+	position: absolute;
+	top: -10px;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 60px;
+	height: 20px;
+	background: rgba(200, 200, 200, 0.5);
+	border-radius: 2px;
+}
+
+.postit-note p {
+	margin: 0;
+	text-align: left;
+}
+
+.postit-date {
+	position: absolute;
+	top: 0.5rem;
+	right: 0.75rem;
+	font-size: 0.75rem;
+	color: #888;
+	font-style: italic;
+}
+
+/* Hide margin note on smaller screens, show below chart instead */
+@media (max-width: 1100px) {
+	.postit-note {
+		position: relative;
+		top: auto;
+		right: auto;
+		margin: 2rem auto 1rem;
+		width: 280px;
+		transform: rotate(-1deg);
+	}
+}
+
+/* Hide total messages legend on mobile */
+@media (max-width: 600px) {
+	.legend-item:nth-child(3) {
+		display: none;
+	}
 }
